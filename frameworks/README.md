@@ -1,6 +1,7 @@
 + [VSCode Snippets](#a1)
 + [pm2](#a2)
 + [Предотвращение скролла, зума, хайлайта кнопок Safari](#a3)
++ [Применение PHP внутри .html](#a4)
 
 ### <a name="a1"></a> VSCode Snippets
 ```
@@ -52,4 +53,8 @@ touch-action: manipulation; // зум по двойному тапу
 
 -webkit-tap-highlight-color: transparent; // хайлайт нажатой кнопки
 ```
+***
+
+### <a name="a4"></a> Применение PHP внутри .html
+```AddHandler application/x-httpd-php .html .htm```
 ***
