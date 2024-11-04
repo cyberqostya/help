@@ -2,6 +2,7 @@
 + [pm2](#a2)
 + [Предотвращение скролла, зума, хайлайта кнопок Safari](#a3)
 + [Применение PHP внутри .html](#a4)
++ [Вывод компонента php](#a5)
 
 ### <a name="a1"></a> VSCode Snippets
 ```
@@ -58,3 +59,6 @@ touch-action: manipulation; // зум по двойному тапу
 ### <a name="a4"></a> Применение PHP внутри .html
 ```AddHandler application/x-httpd-php .html .htm```
 ***
+
+### <a name="a5"></a> Вывод компонента php
+```<?php include $_SERVER['DOCUMENT_ROOT'] . '/components/Header/Header.php'; ?>```
