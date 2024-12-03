@@ -1,8 +1,16 @@
++ [hosts для развертки на боевом с БД](#a6)
 + [VSCode Snippets](#a1)
 + [pm2](#a2)
 + [Предотвращение скролла, зума, хайлайта кнопок Safari](#a3)
 + [Применение PHP внутри .html](#a4)
 + [Вывод компонента php](#a5)
+
+### <a name="a6"></a> hosts
+C:\Windows\System32\drivers\etc  
+```
+87.228.27.58 zagorodny.tv
+```
+***
 
 ### <a name="a1"></a> VSCode Snippets
 ```
