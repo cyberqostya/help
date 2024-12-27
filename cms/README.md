@@ -1,3 +1,4 @@
++ [Инфоблок для дат акций](#a20)
 + [Редирект 404 error.php](#a1)
 + [console.log в PHP](#a2)
 + [Не работает SVG](#a3)
@@ -23,6 +24,28 @@
 
 
 
+
+### <a name="a20"></a> Инфоблок для дат акций
+- Сначала создать ифноблок "Акции" 
+- в нем контент "Даты" с символьным кодом `dati` и создать поле "Значение" в разделе "Свойства" с символьным кодом "value"
+- элемент "Дата окончания акций" с символьным кодом `promotion_expire_date`
+- Затем добавить код ниже в header.php или в local/php_interface/init.php
+```
+// Создаёт константу SITE_SETTINGS из значений в адм. панели: Контент/Акции/Даты/Дата окончания акций
+$settings = [];
+CModule::IncludeModule('iblock');
+$res = CIBlockElement::GetList([], ['IBLOCK_CODE' => 'dati'], false, false, ['IBLOCK_ID', 'ID', 'CODE', 'PROPERTY_*']);
+while ($setting = $res->GetNextElement()) {
+  $fields = $setting->GetFields();
+  $props = $setting->GetProperties();
+  $settings[$fields['CODE']] = $props['value']['VALUE'];
+}
+define('SITE_SETTINGS', $settings);
+```
+
+Вывод:
+`SITE_SETTINGS['promotion_expire_date']`
+***
 
 ### <a name="a1"></a> Редирект 404 error.php
 ```
