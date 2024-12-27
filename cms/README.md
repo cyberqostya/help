@@ -30,17 +30,22 @@
 - в нем контент "Даты" с символьным кодом `dati` и создать поле "Значение" в разделе "Свойства" с символьным кодом "value"
 - элемент "Дата окончания акций" с символьным кодом `promotion_expire_date`
 - Затем добавить код ниже в header.php или в local/php_interface/init.php
+- Несколько значений в одном инфоьблоке настроек
 ```
 // Создаёт константу SITE_SETTINGS из значений в адм. панели: Контент/Акции/Даты/Дата окончания акций
-$settings = [];
+$settingsFromAdminPanel = [];
 CModule::IncludeModule('iblock');
 $res = CIBlockElement::GetList([], ['IBLOCK_CODE' => 'dati'], false, false, ['IBLOCK_ID', 'ID', 'CODE', 'PROPERTY_*']);
 while ($setting = $res->GetNextElement()) {
   $fields = $setting->GetFields();
   $props = $setting->GetProperties();
-  $settings[$fields['CODE']] = $props['value']['VALUE'];
+
+  foreach ($props as $prop) {
+	$settingsFromAdminPanel[$prop['CODE']] = $prop['VALUE'];
+  }
+
 }
-define('SITE_SETTINGS', $settings);
+define('SITE_SETTINGS', $settingsFromAdminPanel);
 ```
 
 Вывод:
