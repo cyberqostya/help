@@ -75,8 +75,9 @@ add_action( 'wp_enqueue_scripts', 'register_custom_data' );
 
 ```
 function mik(...messages) {
-  const styles = "background: #3F51B5; color: #FFF; padding: 5px; font-size: 10px";
-  console.debug("%c" + messages.join(' '), styles);
+  const styles = "background: #3F51B5; color: #FFF; padding: 5px 8px; font-size: 11px; border-radius: 4px; line-height: 1.5";
+  const formatted = messages.map(message => typeof message === 'object' ? JSON.stringify(message) : String(message)).join(' ');
+  console.debug("%c" + formatted, styles);
 }
 ```
 
