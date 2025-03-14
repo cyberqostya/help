@@ -74,9 +74,9 @@ add_action( 'wp_enqueue_scripts', 'register_custom_data' );
 # <a name="a2"></a> Цветная консоль
 
 ```
-function mik(message) {
+function mik(...messages) {
   const styles = "background: #3F51B5; color: #FFF; padding: 5px; font-size: 10px";
-  console.debug("%c" + message, styles);
+  console.debug("%c" + messages.join(' '), styles);
 }
 ```
 

@@ -2,9 +2,9 @@
   // ИНТЕГРАЦИЯ СО СПА СЕТКАМИ
 
   // Вспомогательные функции
-  function mik(message) {
+  function mik(...messages) {
     const styles = "background: #3F51B5; color: #FFF; padding: 5px; font-size: 10px";
-    console.debug("%c" + message, styles);
+    console.debug("%c" + messages.join(" "), styles);
   }
   function createCookie(name, value, days = 1) {
     const date = new Date();
