@@ -1,5 +1,6 @@
 (() => {
   // ИНТЕГРАЦИЯ СО СПА СЕТКАМИ
+  // Тестовая ссылка ?utm_source=admitad&utm_medium=affiliate&utm_campaign=13130&admitad_uid=b35cf9a04038e5a40a89e7625fea6110
 
   // Вспомогательные функции
   function mik(...messages) {
@@ -47,6 +48,24 @@
         url: "https://gdeslon.ru/api/v1/postbacks/?",
       });
     },
+
+    admitad: (uid) => {
+      cpabody = (phoneInput) => ({
+        params: {
+          campaign_code: "c81333c15b",
+          postback_key: "BDC75B214649b21164921e25eA5f5497",
+          action_code: 1,
+          tariff_code: 1,
+          payment_type: "sale",
+
+          uid,
+          order_id: phoneInput.value.replace(/\D/g, "").replace(/(\d{7})$/, "xxxxxxx"),
+          price: 1,
+          currency_code: "RUB",
+        },
+        url: "https://ad.admitad.com/r?",
+      });
+    },
   };
 
   switch (utm_source) {
@@ -66,6 +85,14 @@
       createCpabody[utm_source](urlParams.get("utm_content"));
       break;
 
+    // CPA admitad
+    case "admitad":
+      createCookie("last_source", utm_source);
+      createCookie("last_source_cpadata", urlParams.get("admitad_uid"));
+
+      createCpabody[utm_source](urlParams.get("admitad_uid"));
+      break;
+
     case null:
       const cookie = findCookie("last_source");
       if (!cookie) return;
@@ -79,6 +106,7 @@
   // Отправка постбека
   document.querySelectorAll("form").forEach((form) => {
     form.addEventListener("submit", function (event) {
+      // Форма не отправилась - не валидна
       if (!event.target.checkValidity()) return;
 
       const phoneInput = this.querySelector('input[type="tel"]') || this.querySelector("input");
