@@ -19,6 +19,13 @@
   function findCookie(name) {
     return document.cookie.split("; ").find((cookie) => cookie.startsWith(name));
   }
+  function hashPhone(phone) {
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(phone)).then((buffer) => {
+      return Array.from(new Uint8Array(buffer))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+    });
+  }
 
   // Узнаем с какого CPA к нам зашли
   const urlParams = new URLSearchParams(window.location.search);
@@ -50,21 +57,26 @@
     },
 
     admitad: (uid) => {
-      cpabody = (phoneInput) => ({
-        params: {
-          campaign_code: "c81333c15b",
-          postback_key: "BDC75B214649b21164921e25eA5f5497",
-          action_code: 1,
-          tariff_code: 1,
-          payment_type: "sale",
+      cpabody = async (phoneInput) => {
+        const phone = phoneInput.value.replace(/\D/g, "");
+        const phoneHash = await hashPhone(phone);
 
-          uid,
-          order_id: phoneInput.value.replace(/\D/g, "").replace(/(\d{7})$/, "xxxxxxx"),
-          price: 1,
-          currency_code: "RUB",
-        },
-        url: "https://ad.admitad.com/r?",
-      });
+        return {
+          params: {
+            campaign_code: "c81333c15b",
+            postback_key: "BDC75B214649b21164921e25eA5f5497",
+            action_code: 1,
+            tariff_code: 1,
+            payment_type: "sale",
+
+            uid,
+            order_id: phoneHash,
+            price: 1,
+            currency_code: "RUB",
+          },
+          url: "https://ad.admitad.com/r?",
+        };
+      };
     },
   };
 
@@ -105,7 +117,7 @@
 
   // Отправка постбека
   document.querySelectorAll("form").forEach((form) => {
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
       // Форма не отправилась - не валидна
       if (!event.target.checkValidity()) return;
 
@@ -113,18 +125,20 @@
 
       mik(`submit произошел | ${findCookie("last_source").split("=")[1]} | phone - ${phoneInput.value}`);
 
-      fetch(`./cpasender.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cpabody(phoneInput)),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          mik("Ответ от сервера: ", result);
-        })
-        .catch((error) => console.error("Вот такая ошибка в catch:", error));
+      try {
+        const response = await fetch(`./cpasender.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(await cpabody(phoneInput)),
+        });
+
+        const result = await response.json();
+        mik("Ответ от сервера: ", result);
+      } catch (error) {
+        console.error("Вот такая ошибка в catch:", error);
+      }
     });
   });
 })();
