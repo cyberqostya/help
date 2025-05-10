@@ -32,7 +32,8 @@ sudo nginx -t
 sudo systemctl reload nginx
 
 sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx
+sudo certbot --nginx (выбрать ALL)
+(sudo certbot --nginx -d PROJECTNAME.cyberqostya.ru)
 ```
 ***
 
