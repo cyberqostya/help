@@ -1,9 +1,40 @@
++ [Добавление сайта на сервер](#a7)
 + [hosts для развертки на боевом с БД](#a6)
 + [VSCode Snippets](#a1)
 + [pm2](#a2)
 + [Предотвращение скролла, зума, хайлайта кнопок Safari](#a3)
 + [Применение PHP внутри .html](#a4)
 + [Вывод компонента php](#a5)
+
+### <a name="a7"></a> Команды для добавления сайта на сервер
+```
+sudo mkdir -p /var/www/PROJECTNAME/html
+sudo chown -R $USER:$USER /var/www/PROJECTNAME/html
+
+add DNS subdomain
+
+/etc/nginx/sites-available/all-projects
+server {
+    listen 80;
+    server_name PROJECTNAME.cyberqostya.ru;
+
+    root /var/www/PROJECTNAME/html;
+    index index.html;
+
+    error_log /var/log/nginx/PROJECTNAME.error.log;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+
+sudo nginx -t
+sudo systemctl reload nginx
+
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx
+```
+***
 
 ### <a name="a6"></a> hosts
 C:\Windows\System32\drivers\etc  
