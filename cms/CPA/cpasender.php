@@ -13,6 +13,7 @@ $url = $data['url'];
 foreach ($data['params'] as $key => $value) {
   $url .= $key . '=' . $value . '&';
 }
+$url = substr($url, 0, -1);
 
 // Логи получившегося URL ДО отправки
 file_put_contents("log.txt", date("Y-m-d H:i:s") . ' | ' . $url . "\n", FILE_APPEND);
