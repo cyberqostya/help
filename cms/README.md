@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
           font-size: 18px;
           margin: 0;
           line-height: 1.2;
+	  color: #000;
         }
 
         .cookiemik__button {
