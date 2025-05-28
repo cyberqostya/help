@@ -10,7 +10,7 @@
 # <a name="a6"></a> Плашка Cookie
 
 ```
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const cookieLink = '/zhashita.html';
   const cookieName = 'cookieAgreement';
 
