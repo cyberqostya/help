@@ -1,0 +1,69 @@
+<label class="mikcheckbox">
+  <input type="checkbox" class="mikcheckbox__input" name="mikcheckbox" required>
+  <div class="mikcheckbox__indicator"></div>
+  <span class="mikcheckbox__text">Я даю согласие на обработку персональных данных</span>
+</label>
+
+<style>
+  .mikcheckbox {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    margin: .5em 0;
+    position: relative;
+
+    /*  */
+    --mikwidth: 1.4em;
+    --mikcolor: #191b23;
+  }
+
+  .mikcheckbox__input {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .mikcheckbox__input:checked~.mikcheckbox__indicator {
+    opacity: 1;
+  }
+
+  .mikcheckbox__input:checked~.mikcheckbox__indicator::after {
+    opacity: 1;
+  }
+
+  .mikcheckbox__indicator {
+    border: calc(var(--mikwidth) / 20 * 2) solid #000;
+    box-sizing: border-box;
+    display: inline-block;
+    opacity: .6;
+    position: relative;
+    transition: all .3s;
+    width: var(--mikwidth);
+    height: var(--mikwidth);
+    border-color: var(--mikcolor);
+    flex-shrink: 0;
+  }
+
+  .mikcheckbox__indicator::after {
+    border: solid #000;
+    border-width: 0 calc(var(--mikwidth) / 20 * 2) calc(var(--mikwidth) / 20 * 2) 0;
+    border-color: var(--mikcolor);
+    content: "";
+    opacity: 0;
+    position: absolute;
+    transition: all .3s;
+    transform: rotate(45deg);
+    left: calc(var(--mikwidth) / 20 * 6);
+    top: calc(var(--mikwidth) / 20 * 2);
+    height: calc(var(--mikwidth) / 20 * 8);
+    width: calc(var(--mikwidth) / 20 * 3);
+  }
+
+  .mikcheckbox__text {
+    line-height: 1;
+    /*  */
+    font-size: calc(var(--mikwidth) / 20 * 12);
+    color: inherit;
+  }
+</style>
