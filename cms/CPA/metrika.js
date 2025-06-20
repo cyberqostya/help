@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const counter = window.Ya.Metrika2.counters()[0].id;
 
   function goym(name) {
