@@ -2,42 +2,12 @@
 | ---------------------------------------------- |
 | [Квадратьик Чекбокс](./checkboxSquare.html)    |
 | [Плашка Cookie](./cookiePlate.js)              |
-| [Цели](#a5)                                    |
+| [Цели](./metrika.js)                           |
 | [Подключение к СПА сеткам](./CPA/)             |
 | [Инфоблок для дат акций](#a4)                  |
 | [Подключение кастомных стилей и скриптов](#a3) |
 | [Цветная консоль](#a2)                         |
 | [Дать права папке и подфайлам](#a1)            |
-
-# <a name="a5"></a> Цели
-
-```
-window.addEventListener('load', () => {
-  const counterID = 100297886;
-
-	function goym(name) {
-		ym(counterID, 'reachGoal', name);
-		console.log('Выполнилась цель ' + name);
-	}
-
-  // На телефоны
-	document.querySelectorAll('a[href*=tel]').forEach(i => {i.addEventListener('click', () => { goym('goal_phone_success'); })});
-
-  // На кнопки с нужным названием
-	const oneClickBuy = [...document.querySelectorAll('span.btn.one_click')].filter(i => i.innerHTML.toLowerCase().includes('купить в 1 клик'));
-	if(oneClickBuy.length) oneClickBuy.forEach(i => i.addEventListener('click', () => { goym('goal_1click_success'); }));
-
-  // На формы при успешном сабмите
-  document.querySelectorAll('form').forEach(i => {
-    const btn = i.querySelector('button');
-    if(btn) {
-      btn.addEventListener('click', (e) => {
-        if(i.checkValidity()) goym('SEND_FORM');
-      })
-    }
-  });
-})
-```
 
 # <a name="a4"></a> Инфоблок для дат акций
 
