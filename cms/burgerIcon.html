@@ -1,0 +1,65 @@
+<button class="mikburger"><span></span></button>
+
+<style>
+  .mikburger {
+    --size: 26px;
+    --color: #fff;
+
+    width: var(--size);
+    height: var(--size);
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .mikburger span {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    background-color: var(--color);
+    transition: transform 0.3s ease;
+    margin: auto;
+  }
+
+  .mikburger span::before,
+  .mikburger span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: inherit;
+  }
+
+  .mikburger span::before {
+    top: calc(var(--size) * 0.346 * -1);
+    transition: top 0.3s ease 0.3s, transform 0.3s ease;
+  }
+
+  .mikburger span::after {
+    bottom: calc(var(--size) * 0.346 * -1);
+    transition: bottom 0.3s ease 0.3s, transform 0.3s ease;
+  }
+
+  /* _active */
+  .mikburger._active span {
+    transform: rotate(225deg);
+    transition: transform 0.3s ease 0.3s;
+  }
+
+  .mikburger._active span::before {
+    top: 0;
+    transition: top 0.3s ease, transform 0.3s ease 0.3s;
+  }
+
+  .mikburger._active span::after {
+    bottom: 0;
+    transform: rotate(90deg);
+    transition: bottom 0.3s ease, transform 0.3s ease 0.3s;
+  }
+</style>
