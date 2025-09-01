@@ -1,13 +1,14 @@
 window.addEventListener("load", () => {
   const counter = window.Ya.Metrika2.counters()[0].id;
-
+  console.log("Метрика инициализирована с счетчиком № " + counter);
+  
   function goym(name) {
     ym(counter, "reachGoal", name);
     console.log("Выполнилась цель " + name);
   }
 
   // На телефоны
-  document.querySelectorAll("a[href*=tel]").forEach((i) => {
+  document.querySelectorAll("a[href*='tel']").forEach((i) => {
     i.addEventListener("click", () => {
       goym("goal_phone_success");
     });
