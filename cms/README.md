@@ -1,5 +1,6 @@
 | Оглавление                                     |
 | ---------------------------------------------- |
+| [mynormalize.css](./mynormalize.css)           |
 | [Бургер с анимацией](./burgerIcon.html)        |
 | [Квадратик Чекбокс](./checkboxSquare.html)     |
 | [Плашка Cookie](./cookiePlate.js)              |
